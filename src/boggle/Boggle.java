@@ -1,35 +1,48 @@
 package boggle;
 
-import java.util.ArrayList;
-import inputOutput.ReadDataFile;
 import core.Board;
-public class Boggle
+import inputOutput.ReadDataFile;
+import userInterface.BoggleUI;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Juan
+ */
+public class Boggle 
 {
-	public static void main(String[] args)
-	{
-		/*
-		 * 1.	Create an instance of class ReadDataFile passing the file name variable as an argument 
-		 * 2.	Call method populateData() from class ReadDataFile
-		 * 3.	Set member variable of type ArrayList equal to method call getData() from class ReadDataFile
-		 * 4.	Create an instance of class Board passing the file data in the ArrayList as an argument
-		 * 5.	Call method shakeDice() from class Board
-		 */
-		ArrayList<String> boggleData = new ArrayList<String>();
-		String file;
-		
-		if(args.length == 0) {
-			file = "src\\inputOutput\\BoggleData.txt";
-		} else {
-			file = args[0].toString();
-		}
-		ReadDataFile boggleDataFile = new ReadDataFile(file);
-		
-		boggleDataFile.populateData();
-		
-		boggleData = boggleDataFile.getData();
-		
-		Board myBoard = new Board(boggleData);
-		
-		myBoard.shakeDice();
-	}
+    // Array list to store data value of each die
+    private static ArrayList boggleData = new ArrayList();
+    
+    // name of the data file
+    private static String dataFileName = new String("BoggleData.txt");
+ 
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) 
+    {
+        // read in the data file
+        ReadDataFile data = new ReadDataFile(dataFileName);
+        data.populateData();
+
+        // create instance of Board passing the boggleData
+        Board board = new Board(data.getData());
+        
+        dataFileName = "TemporaryDictionary.txt";
+        data = new ReadDataFile(dataFileName);
+        data.populateData();
+        ArrayList<String> dictData = new ArrayList<String>();
+        dictData = data.getData();
+        /*for (String temp : dictData) {
+			System.out.println(temp);
+		}*/
+
+        // create instance of BoggleUi passing board as an arguement 
+        //BoggleUI boggleUI = new BoggleUI(board);
+        BoggleUI boggle2 = new BoggleUI(board,dictData);
+    }
+    
 }
