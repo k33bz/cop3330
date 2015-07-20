@@ -238,7 +238,8 @@ public class BoggleUI
 				
 				//int delay = 1000; //1 second
 				//final Timer gameTime = new Timer(1000, null);
-				gameTime.start();
+				gameTime.restart();
+				//gameTime.start();
 				gameTime.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent ev) {
 						String temptime = timeLabel.getText();
@@ -257,6 +258,7 @@ public class BoggleUI
 						
 						if(minute == 0 && second == 00) {
 							gameTime.stop();
+							submitWord.doClick();
 							endGame();
 						}
 		            }
